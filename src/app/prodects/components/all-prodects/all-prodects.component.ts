@@ -10,13 +10,32 @@ import { ProdectsService } from '../../services/prodects.service';
 })
 export class AllProdectsComponent {
   products:any[]=[];
+  categorys:any[]=[];
+  status="loading";
+  errorNumber=0;
   constructor(private service:ProdectsService){}
   ngOnInit():void{
     this.GetProdects();
+    this.GetCategories();
   }
   GetProdects(){
     this.service.GetAllProdects().subscribe((res:any)=>{
       this.products=res;
+      this.status="success";
+    },error=>{
+      this.status="error"
+      this.errorNumber=error.status;
+      console.log(error);
+    })
+  }
+  GetCategories(){
+    this.service.GetAllCategory().subscribe((res:any)=>{
+      this.categorys=res;
+      this.status="success";
+    },error=>{
+      this.status="error"
+      this.errorNumber=error.status;
+      console.log(error);
     })
   }
 
