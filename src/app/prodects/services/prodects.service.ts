@@ -13,4 +13,7 @@ export class ProdectsService {
   GetAllCategory(){
     return this.http.get(environment.apiUrl+`products/categories`);
   }
+  GetCategoryProdects(category:string){
+    return this.http.get(environment.apiUrl+`products/category/${category}`);
+  }
 }
