@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ProdectsService } from '../../services/prodects.service';
+import { SpinnerComponent } from "../../../sheard/components/spinner/spinner.component";
 
 @Component({
   selector: 'app-all-prodects',
   standalone: true,
-  imports: [],
+  imports: [SpinnerComponent],
   templateUrl: './all-prodects.component.html',
   styleUrl: './all-prodects.component.css'
 })
@@ -48,6 +49,8 @@ export class AllProdectsComponent {
   }
 
   FilterProdects(event:any){
+    this.status="loading";
+    console.log(this.status)
     console.log(event.target.value);
     (event.target.value==='all') ? this.GetProdects():this.GetProdectsByCategory(event.target.value);
     
