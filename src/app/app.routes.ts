@@ -5,8 +5,8 @@ import { ProdectDetailsComponent } from './prodects/components/prodect-details/p
 
 export const routes: Routes = [
     {path:'products', component:AllProdectsComponent},
+    {path:'product/:id', component:ProdectDetailsComponent},
     {path:'cart',component:CartComponent},
-    {path:'details',component:ProdectDetailsComponent},
     {path:'**',component:AllProdectsComponent,pathMatch:'full'}
     
 ];
