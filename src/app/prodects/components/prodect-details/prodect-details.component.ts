@@ -40,14 +40,19 @@ export class ProdectDetailsComponent {
 
   AddToCart(){
     if('cart' in localStorage){
+      console.log(this.details)
       this.cart=JSON.parse(localStorage.getItem('cart')!);
-      let exist=this.cart.filter((item)=>item.id==this.details.id);
+      console.log(this.cart)
+      let exist=this.cart.find(item=>item.item.id==this.details.id);
       if(exist){
         alert("Product already exist in cart");
         return;
       }
-      this.cart.push({item: this.details,quantity:this.amount});
-      localStorage.setItem('cart',JSON.stringify(this.cart));
+      else{
+        this.cart.push({item: this.details,quantity:this.amount});
+        localStorage.setItem('cart',JSON.stringify(this.cart));
+      }
+      
     }
     else{
       this.cart.push({item: this.details,quantity:this.amount});

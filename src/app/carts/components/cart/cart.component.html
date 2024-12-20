@@ -1,1 +1,49 @@
-<p>cart works!</p>
+
+    <div class="container my-5 px-2 py-1 border border-1">
+        <h1 class="text-danger">Shopping Cart</h1>
+        <p>You have <span class="text-danger">{{cart.length}}</span> item in your cart</p>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Totle</th>
+                <th scope="col">Handel</th>
+
+            </tr>
+            </thead>
+            <tbody>
+              @for (prodect of cart; track $index) {
+                <tr>
+                  <td class="align-content-center img p-1 "><img class="w-100" src="{{prodect.item.image}}" alt="{{prodect.item.title}}"></td>
+                  <td class="align-content-center">{{prodect.item.title}}</td>
+                  <td class="align-content-center">{{prodect.item.price}} $</td>
+                  <td class="align-content-center">
+                      <button class="text-light btn btn-dark align-content-center" (click)="AddQuantity($index)">+</button>
+                      <input type="number" (change)="UpdateCart($event,$index)" [(ngModel)]="prodect.quantity" class="mx-2 text-center align-content-center">
+                      <button class="text-light btn btn-dark align-content-center" (click)="MinusQuantity($index)">-</button>
+                  </td>
+                  <td class="align-content-center">{{(prodect.item.price*prodect.quantity).toFixed(2)}}</td>
+                  <td class="align-content-center"><button class="btn btn-danger" (click)="RemoveItem($index)">Delete</button></td>
+                
+              </tr>
+              }
+              
+            </tbody>
+            
+          </table>
+          <div class="d-flex justify-content-end align-items-center">
+            <span class="fw-bolder mx-1">Total : {{GetTotalCart().toFixed(2)}} $</span>
+            <button class="btn-danger btn mx-1" (click)="ClearCart()">Delete All</button>
+            <button id="orderBtn" class="btn btn-success mx-1" (click)="OrderCart()" [disabled]="disapledOrder">Oreder Now</button>
+          </div>
+          @if(success){
+            <div class="alert alert-success my-3">
+              Will done! Your Order has been successfully Sent.
+            </div>
+          }
+          
+    </div>
+
